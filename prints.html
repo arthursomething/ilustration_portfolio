@@ -27,6 +27,17 @@
   <span class="cursor__label" id="cursorLabel"></span>
 </div>
 
+<!-- fullscreen lightbox — same component as the main portfolio page -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lightbox__close" id="lightboxClose" aria-label="Cerrar" data-cursor="close" data-i18n="lightbox.close" data-i18n-aria="lightbox.close">Cerrar</button>
+  <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Pieza anterior" data-cursor="prev" data-i18n-aria="lightbox.prevAria">&larr;</button>
+  <button class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Pieza siguiente" data-cursor="next" data-i18n-aria="lightbox.nextAria">&rarr;</button>
+  <figure class="lightbox__figure">
+    <img class="lightbox__img" id="lightboxImg" src="" alt="" />
+    <figcaption class="lightbox__caption" id="lightboxCaption"></figcaption>
+  </figure>
+</div>
+
 <header class="site-header">
   <a class="site-header__mark" href="index.html#top" data-cursor="home" data-i18n-cursor="cursor.home"><img src="images/logo.svg" alt="Arthur" /></a>
   <div class="site-header__actions">
