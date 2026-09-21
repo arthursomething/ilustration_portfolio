@@ -455,15 +455,14 @@ html.is-lightbox-open{ overflow: hidden; }
 .print-card__main-frame img{
   display: block;
   width: 100%;
-  /* fixed 16px trim off the top: the image renders 16px taller than its
-     box, anchored+cropped from the top via object-position, then shifted
-     up by exactly that 16px — everything beyond it crops off the bottom
-     instead, which is where there's already-unwanted table/background
-     to spare (see the raw print-01-0* photos). */
-  height: calc(100% + 16px);
-  margin-top: -16px;
+  height: 100%;
   object-fit: cover;
-  object-position: center top;
+  /* the actual print (not just the raw photo frame) sits roughly 13%-82%
+     down the source photo, with a lot more bare table above it than
+     below — plain top/center anchoring left it looking bottom-heavy.
+     40% centers the crop window on the print itself instead of the
+     photo's own bounds. */
+  object-position: center 40%;
 }
 .print-card__thumbs{
   display: flex;
