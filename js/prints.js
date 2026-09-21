@@ -60,7 +60,9 @@
       <article class="print-card" data-print-id="${p.id}">
         <div class="print-card__gallery">
           <button class="print-card__main" type="button" data-open-lightbox data-cursor="view" data-i18n-cursor="cursor.view">
-            <img data-main-img src="${p.images[0]}" srcset="${smallSrc(p.images[0])} 480w, ${p.images[0]} 1200w" sizes="(max-width: 700px) 90vw, 42vw" alt="${title}" />
+            <span class="print-card__main-frame">
+              <img data-main-img src="${p.images[0]}" srcset="${smallSrc(p.images[0])} 480w, ${p.images[0]} 1200w" sizes="(max-width: 700px) 90vw, 42vw" alt="${title}" />
+            </span>
           </button>
           <div class="print-card__thumbs">${thumbs}</div>
         </div>

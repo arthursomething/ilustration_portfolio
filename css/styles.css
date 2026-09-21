@@ -436,10 +436,18 @@ html.is-lightbox-open{ overflow: hidden; }
   margin: 0;
   font: inherit;
   text-align: inherit;
+  appearance: none;
+}
+/* the aspect-ratio/crop frame has to live on a plain span rather than the
+   button itself — Chromium centers a <button>'s content in an internal
+   anonymous box, which quietly breaks percentage-height children even
+   when the button has its own definite aspect-ratio height. */
+.print-card__main-frame{
+  display: block;
   overflow: hidden;
   aspect-ratio: 3 / 4;
 }
-.print-card__main img{
+.print-card__main-frame img{
   display: block;
   width: 100%;
   /* fixed 16px trim off the top: the image renders 16px taller than its
