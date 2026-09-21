@@ -456,13 +456,12 @@ html.is-lightbox-open{ overflow: hidden; }
   display: block;
   width: 100%;
   height: 100%;
+  /* the source file (images/prints/print-01-01*.webp) is pre-cropped to
+     this same 3:4 ratio, centered on the print itself rather than the
+     raw photo's frame — see the prints-data.js images comment. cover
+     here is just a safety net for any rounding difference. */
   object-fit: cover;
-  /* the actual print (not just the raw photo frame) sits roughly 13%-82%
-     down the source photo, with a lot more bare table above it than
-     below — plain top/center anchoring left it looking bottom-heavy.
-     40% centers the crop window on the print itself instead of the
-     photo's own bounds. */
-  object-position: center 40%;
+  object-position: center;
 }
 .print-card__thumbs{
   display: flex;

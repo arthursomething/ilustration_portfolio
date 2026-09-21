@@ -16,6 +16,13 @@
  *    instead of a working buy button.
  * 4. portfolioId is optional — set it to a WORKS id (js/data.js) to
  *    link back to the original digital piece, if there is one.
+ * 5. images[0] is used as the card's main photo (see .print-card__main
+ *    in css/styles.css) at a fixed 3:4 ratio, and is also what opens in
+ *    the lightbox — so if the raw photo needs a specific crop to look
+ *    right (e.g. it's a tall phone photo with a lot of bare table),
+ *    pre-crop that source file itself rather than trying to fix it with
+ *    CSS object-position, so the lightbox's full-res view matches what
+ *    the card shows instead of opening the uncropped original.
  */
 window.PRINTS = [
   {
