@@ -6,6 +6,12 @@
  */
 window.I18N = {
   es: {
+    "nav.prints": "Impresiones",
+    "nav.portfolio": "Portafolio",
+    "prints.eyebrow": "Impresiones y pre-ventas",
+    "prints.title": "Impresiones",
+    "prints.lede": "Impresiones firmadas y pre-ventas de piezas originales, con entrega en persona en Ciudad de México.",
+    "prints.empty": "Todavía no hay piezas publicadas. Estoy preparando el catálogo. Vuelve pronto o sígueme en Instagram para enterarte primero.",
     "location.city": "Ciudad de México",
     "hero.tagline": "Ilustración y narrativa visual. Ciudad de México.",
     "hero.scrollcue": "DESPLÁZATE — EXPLORA — DESPLÁZATE — EXPLORA — ",
@@ -43,6 +49,12 @@ window.I18N = {
     "lang.switchTo": "EN",
   },
   en: {
+    "nav.prints": "Prints",
+    "nav.portfolio": "Portfolio",
+    "prints.eyebrow": "Prints & pre-orders",
+    "prints.title": "Prints",
+    "prints.lede": "Signed prints and original-piece pre-orders, delivered in person around Mexico City.",
+    "prints.empty": "Nothing published yet. I'm putting the catalog together. Check back soon or follow me on Instagram to hear first.",
     "location.city": "Mexico City",
     "hero.tagline": "Illustration and visual narrative. Mexico City.",
     "hero.scrollcue": "SCROLL — EXPLORE — SCROLL — EXPLORE — ",
