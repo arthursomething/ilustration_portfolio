@@ -36,7 +36,7 @@ window.PRINTS = [
       "images/prints/print-01-04.webp",
       "images/prints/print-01-05.webp",
     ],
-    buyUrl: "",
+    buyUrl: "https://buy.stripe.com/9B628kgSWg9Zehi9Cg5sA00",
     portfolioId: "33",
   },
 ];
