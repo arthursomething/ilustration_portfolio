@@ -1,0 +1,735 @@
+/* ==========================================================================
+   Arthur — Illustration portfolio
+   One continuous surface. No boxed sections — rhythm comes from type
+   scale, spacing and motion, not borders or background blocks.
+   ========================================================================== */
+
+/* ---------- brand type (self-hosted variable fonts) ---------- */
+:root{
+  --bg: #0b0b0c;
+  --bg-2: #111113;
+  --fg: #f2f1ec;
+  --fg-dim: #b9b6b0;
+  --fg-mute: #726f6b;
+  /* sampled directly from the signature stamp on Arthur's own pieces
+     (e.g. "Classical Head Study", "Lucha Cherub") rather than picked
+     arbitrarily — this is the actual brand color, not a guess at one */
+  --accent: #822cdb;
+  --line: rgba(242,241,236,0.14);
+
+  --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --sans: "Bricolage Grotesque", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --edge: clamp(20px, 4.2vw, 64px);
+  --rhythm: clamp(96px, 16vw, 220px);
+
+  --ease: cubic-bezier(.16,.84,.28,1);
+}
+
+*{ box-sizing: border-box; }
+
+html{
+  background: var(--bg);
+  scroll-behavior: auto;
+}
+
+html.no-js body{ cursor: auto; }
+
+body{
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+  cursor: none;
+}
+
+@media (max-width: 760px), (hover: none){
+  body{ cursor: auto; }
+}
+
+a{ color: inherit; text-decoration: none; }
+
+img{ max-width: 100%; display: block; }
+
+::selection{ background: var(--fg); color: var(--bg); }
+
+/* ---------- grain overlay ---------- */
+.noise{
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+}
+
+/* ---------- fullscreen overlay loader (not used on initial page load —
+   the hero banner's own logo-draw is the entry animation now; this stays
+   ready for whenever a real asset-wait gate is needed again, see
+   js/main.js boot()) ---------- */
+.loader{
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--bg);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.loader.is-active{ display: flex; }
+.loader__logo{
+  width: clamp(150px, 24vw, 240px);
+  height: auto;
+  overflow: visible;
+}
+
+/* ---------- self-drawing logo mechanics (shared by the loader and the
+   hero banner — see js/main.js drawLogo()) ---------- */
+.draw-logo .draw-line{
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1s var(--ease);
+}
+.draw-logo.is-drawing .draw-line{
+  stroke-dashoffset: 0;
+}
+.draw-logo .draw-dot{
+  opacity: 0;
+  transition: opacity .6s var(--ease);
+}
+.draw-logo .draw-dot.is-visible{ opacity: 1; }
+/* toggled by JS while resetting for a replay — a dedicated class instead
+   of touching the "transition" shorthand inline, which would also wipe
+   the per-line transition-duration/-delay JS sets alongside it */
+.draw-logo.is-resetting .draw-line,
+.draw-logo.is-resetting .draw-dot{
+  transition: none !important;
+}
+
+/* the hero intro holds scroll until its logo has finished drawing */
+html.is-intro-locked{
+  overflow: hidden;
+}
+.loader__label{
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+
+/* ---------- custom cursor ---------- */
+.cursor{
+  position: fixed;
+  top: 0; left: 0;
+  width: 20px; height: 20px;
+  margin: -10px 0 0 -10px;
+  border-radius: 50%;
+  background: var(--fg);
+  pointer-events: none;
+  z-index: 90;
+  mix-blend-mode: difference;
+  transform: translate(-100px,-100px) scale(1);
+  transition: width .35s var(--ease), height .35s var(--ease),
+              margin .35s var(--ease), background .35s var(--ease);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cursor--hover{
+  width: 130px; height: 130px;
+  margin: -65px 0 0 -65px;
+  background: var(--fg);
+}
+.cursor--drag{
+  width: 72px; height: 72px;
+  margin: -36px 0 0 -36px;
+}
+.cursor__label{
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bg);
+  opacity: 0;
+  transition: opacity .25s var(--ease);
+  white-space: nowrap;
+}
+.cursor--hover .cursor__label{ opacity: 1; }
+
+@media (max-width: 760px), (hover: none){
+  .cursor{ display: none; }
+}
+
+/* ---------- click-to-magnify lens ---------- */
+.magnifier{
+  position: fixed;
+  top: 0; left: 0;
+  width: 420px; height: 420px;
+  border-radius: 50%;
+  pointer-events: none;
+  /* above the flying-carousel cards, which peak at z-index:100 for the
+     centered one (see js/main.js layout()) — the lens has to outrank
+     the very card it's zooming into, or it opens invisibly behind it */
+  z-index: 105;
+  background-repeat: no-repeat;
+  background-color: var(--bg-2);
+  box-shadow: 0 0 0 1px rgba(242,241,236,0.25), 0 20px 60px rgba(0,0,0,0.6);
+  opacity: 0;
+  transform: translate(-9999px, -9999px);
+  transition: opacity .2s var(--ease);
+}
+.magnifier.is-active{ opacity: 1; }
+[data-magnify]{ cursor: none; }
+.is-magnifying .cursor{ opacity: 0; }
+
+@media (max-width: 760px), (hover: none){
+  .magnifier{ display: none; }
+}
+
+/* ---------- fullscreen lightbox — click/tap any piece to see it large,
+   at full resolution. Unlike the magnifier above (mouse-only), this
+   works on touch too. ---------- */
+.lightbox{
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(24px, 6vw, 90px);
+  background: rgba(11,11,12,0.96);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .4s var(--ease);
+}
+.lightbox.is-active{
+  opacity: 1;
+  pointer-events: auto;
+}
+html.is-lightbox-open{ overflow: hidden; }
+.lightbox__figure{
+  margin: 0;
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(12px, 2vw, 20px);
+}
+.lightbox__img{
+  max-width: 100%;
+  max-height: 80vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  touch-action: none;
+  cursor: zoom-in;
+}
+.lightbox__img.is-zoomed{ cursor: zoom-out; }
+.lightbox__caption{
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+  text-align: center;
+}
+.lightbox__close,
+.lightbox__nav{
+  position: fixed;
+  background: none;
+  border: 0;
+  color: var(--fg);
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 10px;
+}
+.lightbox__close:hover,
+.lightbox__nav:hover{ color: var(--accent); }
+.lightbox__close{
+  top: clamp(18px, 3vw, 30px);
+  right: var(--edge);
+}
+.lightbox__nav{
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 22px;
+  padding: 16px;
+}
+.lightbox__nav--prev{ left: var(--edge); }
+.lightbox__nav--next{ right: var(--edge); }
+@media (max-width: 700px){
+  .lightbox{ padding: 20px; }
+  .lightbox__nav{ font-size: 18px; padding: 10px; }
+}
+
+/* ---------- progress rail ---------- */
+.rail{
+  position: fixed;
+  right: clamp(10px, 2vw, 22px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 140px;
+  background: var(--line);
+  z-index: 55;
+}
+.rail__fill{
+  position: absolute;
+  top: 0; left: 0; width: 100%;
+  height: 0%;
+  background: var(--fg);
+}
+@media (max-width: 760px){ .rail{ display: none; } }
+
+/* ---------- header ---------- */
+.site-header{
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(18px, 3vw, 30px) var(--edge);
+  mix-blend-mode: difference;
+}
+.site-header__mark{
+  display: block;
+  line-height: 0;
+}
+.site-header__mark img{
+  height: clamp(22px, 2.6vw, 30px);
+  width: auto;
+  display: block;
+}
+.site-header__actions{
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 2vw, 20px);
+}
+.lang-toggle{
+  background: none;
+  border: 0;
+  color: var(--fg);
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 8px;
+  transition: color .3s var(--ease);
+}
+.lang-toggle:hover{
+  color: var(--accent);
+}
+
+/* ---------- hero ---------- */
+.hero{
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--edge);
+  overflow: hidden;
+}
+.hero__title{
+  margin: 0;
+  line-height: 0;
+}
+.hero__title a{
+  display: inline-block;
+  line-height: 0;
+  border-radius: 999px;
+}
+.hero__logo{
+  height: clamp(96px, 15vw, 240px);
+  width: auto;
+  max-width: min(560px, 74vw);
+  display: block;
+  overflow: visible;
+}
+.hero__handle{
+  margin: clamp(8px,1vw,12px) 0 0;
+  font-size: clamp(12px, 1.2vw, 14px);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+  overflow: hidden;
+}
+.hero__handle .line{ display: block; transform: translateY(110%); }
+.hero__tag{
+  margin: clamp(10px,1.6vw,16px) 0 0;
+  font-size: clamp(13px, 1.4vw, 16px);
+  letter-spacing: 0.04em;
+  color: var(--fg-dim);
+  overflow: hidden;
+}
+.hero__tag .line{ display: block; transform: translateY(110%); }
+.hero__scrollcue{
+  position: absolute;
+  bottom: clamp(20px,4vw,40px);
+  left: 0; right: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  color: var(--fg-mute);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+.hero__scrollcue-track{
+  display: inline-flex;
+  animation: scrollcue 18s linear infinite;
+}
+.hero__scrollcue-track span{ padding-right: 4px; }
+@keyframes scrollcue{
+  from{ transform: translateX(0); }
+  to{ transform: translateX(-50%); }
+}
+
+/* ---------- generic section rhythm ---------- */
+section{ position: relative; }
+
+/* ---------- statement ---------- */
+.statement{
+  padding: calc(var(--rhythm) * .12) var(--edge);
+}
+.statement__text{
+  max-width: 20ch;
+  margin: 0 auto;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(30px, 5.4vw, 64px);
+  line-height: 1.18;
+  text-align: center;
+  color: var(--fg-dim);
+}
+.statement__text .line{ display: block; overflow: hidden; }
+.statement__text .line > span{ display: inline-block; transform: translateY(110%); }
+
+/* ---------- bento (three columns — every piece still gets real size on
+   screen; a recurring full-bleed row breaks the rhythm every few pieces.
+   Opens with a hand-placed hero block — see .bento__hero-block below —
+   so the grid reads as curated rather than a uniform table of same-
+   shaped tiles. Cropped with object-fit so nothing ever has to stretch
+   beyond its native resolution) ---------- */
+.bento{
+  padding: calc(var(--rhythm) * .02) var(--edge) var(--rhythm);
+}
+.bento__head{
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: clamp(24px, 4vw, 40px);
+}
+.bento__title{
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 400;
+  color: var(--fg);
+}
+.bento__hint{
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+.bento__grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(2px, .25vw, 4px);
+}
+.bento__item{
+  position: relative;
+  display: block;
+  margin: 0;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .9s cubic-bezier(.16,.84,.44,1), transform .9s cubic-bezier(.16,.84,.44,1);
+}
+.bento__item--full{
+  grid-column: 1 / -1;
+  aspect-ratio: 21 / 9;
+}
+.bento__item.is-in{
+  opacity: 1;
+  transform: none;
+}
+.bento__item img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.bento__item--full img{
+  /* the wide crop is far more aggressive than the 3/4 grid's — center
+     crops the featured pieces' faces/focal point off the top edge */
+  object-position: center 25%;
+}
+
+/* the opening hero block: two tall portraits flank a landscape piece,
+   with a second landscape piece filling in underneath it — its own
+   fixed-height 3-col/2-row grid, independent of the main rhythm below,
+   is what actually makes the two flanking portraits read as "tall"
+   rather than forcing that height through the main grid's row-sizing */
+.bento__hero-block{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: clamp(2px, .25vw, 4px);
+  height: clamp(300px, 46vw, 820px);
+  margin-bottom: clamp(2px, .25vw, 4px);
+}
+.bento__hero-block .bento__item{ aspect-ratio: auto; }
+.bento__hero-block .bento__item--tall{ grid-row: span 2; }
+
+/* Deliberately no small-screen column collapse below — the grid stays a
+   fixed 3-column layout at every width and simply scales down as a
+   whole (like the reference portfolios), rather than reflowing to a
+   single column. */
+
+/* ---------- right-click-to-zoom hint — right-click has no visual
+   affordance of its own (unlike a hover cursor or an underlined link),
+   so without this most people never discover it. Shown on hover,
+   directly on the piece it applies to. Skipped on touch, where there's
+   no hover and no right-click to hint at in the first place. ---------- */
+.zoom-hint{
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  padding: 6px 10px;
+  background: rgba(11,11,12,0.78);
+  color: var(--fg);
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s var(--ease);
+  z-index: 2;
+}
+.bento__item:hover .zoom-hint{ opacity: 1; }
+.flying-carousel__card.is-center:hover .zoom-hint{ opacity: 1; }
+@media (hover: none){ .zoom-hint{ display: none; } }
+
+/* ---------- carousel sections (Fauna, Flora, Anatomy) — "flying cards":
+   no boxed track, no arrows, no dots. Every card in the set floats on the
+   page at once; the centered one is in full focus and every other card
+   fades, shrinks and softens the further it sits from center. Drag to
+   browse, click a side card to bring it forward, autoplay when idle. ---------- */
+.carousel-section{
+  padding: calc(var(--rhythm) * .7) var(--edge);
+  overflow: hidden;
+}
+.carousel-section__head{
+  max-width: min(900px, 92vw);
+  margin: 0 auto;
+  padding-bottom: clamp(28px, 4vw, 46px);
+}
+.carousel-section__heading-row{
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: clamp(12px, 3vw, 24px);
+  flex-wrap: wrap;
+}
+.carousel-section__title{
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(38px, 5.8vw, 68px);
+  font-weight: 400;
+  color: var(--fg);
+}
+.carousel-section__hint{
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+  white-space: nowrap;
+}
+.carousel-section__desc{
+  max-width: 54ch;
+  margin: clamp(12px, 1.8vw, 18px) 0 0;
+  font-size: clamp(14px, 1.7vw, 18px);
+  line-height: 1.55;
+  color: var(--fg-dim);
+}
+.flying-carousel{
+  position: relative;
+  max-width: min(1240px, 96vw);
+  height: clamp(460px, 50vw, 700px);
+  margin: 0 auto;
+}
+.flying-carousel__track{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.flying-carousel__card{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: clamp(270px, 34vw, 480px);
+  aspect-ratio: 3 / 4;
+  margin: 0;
+  cursor: pointer;
+  will-change: transform, opacity, filter;
+  transition: transform 1s var(--ease), opacity .9s var(--ease), filter .9s var(--ease);
+}
+.flying-carousel__card img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  box-shadow: 0 34px 70px rgba(0,0,0,0.55);
+}
+.flying-carousel__card.is-center img{
+  box-shadow: 0 40px 90px rgba(0,0,0,0.65);
+}
+.flying-carousel__caption{
+  text-align: center;
+  margin: clamp(20px, 3vw, 30px) 0 0;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+  opacity: 0;
+  transition: opacity .5s var(--ease);
+}
+.flying-carousel__caption.is-visible{ opacity: 1; }
+
+@media (max-width: 560px){
+  .flying-carousel{ height: clamp(360px, 92vw, 480px); }
+  .flying-carousel__card{ width: clamp(210px, 64vw, 300px); }
+}
+
+/* ---------- about ---------- */
+.about{
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: clamp(30px, 6vw, 80px);
+  padding: var(--rhythm) var(--edge);
+  border-top: 1px solid var(--line);
+}
+.about__text{
+  font-family: var(--serif);
+  font-size: clamp(22px, 3vw, 34px);
+  line-height: 1.32;
+  color: var(--fg-dim);
+  max-width: 34ch;
+}
+.about__text .line{ display: block; overflow: hidden; }
+.about__text .line > span{ display: inline-block; transform: translateY(110%); }
+.about__meta{
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px,3vw,30px);
+  justify-content: center;
+}
+.about__meta-group{ display: flex; flex-direction: column; gap: 6px; }
+.about__meta-label{
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+.about__meta-value{ font-size: 15px; color: var(--fg-dim); }
+
+@media (max-width: 760px){
+  .about{ grid-template-columns: 1fr; }
+}
+
+/* ---------- contact ---------- */
+.contact{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--rhythm) var(--edge) calc(var(--rhythm) * 0.6);
+}
+.contact__pre{
+  margin: 0 0 10px;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+.contact__link{
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(56px, 11vw, 160px);
+  line-height: 1;
+  display: inline-block;
+}
+.contact__link:hover{ color: var(--accent); }
+.contact__socials{
+  display: flex;
+  gap: clamp(18px,3vw,30px);
+  margin-top: clamp(30px,5vw,50px);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--fg-mute);
+}
+.contact__socials a:hover{ color: var(--fg); }
+
+/* ---------- footer ---------- */
+.site-footer{
+  display: flex;
+  justify-content: space-between;
+  padding: clamp(20px,3vw,28px) var(--edge);
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--fg-mute);
+}
+.site-footer a:hover{ color: var(--fg); }
+
+/* ---------- reveal helpers (JS toggles these) ---------- */
+[data-reveal-nav]{
+  transform: translateY(-100%);
+  transition: transform .8s var(--ease);
+}
+[data-reveal-nav].is-in{ transform: translateY(0); }
+
+/* If GSAP/ScrollTrigger fail to load (CDN blocked, offline, slow network)
+   every animated element still shows its content — motion is an
+   enhancement, never a requirement to read the page. */
+.no-motion-fallback .draw-logo .draw-line{
+  stroke-dashoffset: 0 !important;
+  transition: none !important;
+}
+.no-motion-fallback .draw-logo .draw-dot{
+  opacity: 1 !important;
+  transition: none !important;
+}
+.no-motion-fallback{ overflow: auto !important; }
+.no-motion-fallback .hero__handle .line,
+.no-motion-fallback .hero__tag .line,
+.no-motion-fallback .statement__text .line > span,
+.no-motion-fallback .about__text .line > span{
+  transform: none !important;
+}
+.no-motion-fallback .bento__item{
+  opacity: 1 !important;
+  transform: none !important;
+}
+.no-motion-fallback [data-reveal-nav]{
+  transform: translateY(0) !important;
+}

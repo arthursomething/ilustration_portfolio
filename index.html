@@ -1,0 +1,236 @@
+<!doctype html>
+<html class="no-js" lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arthur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Bricolage+Grotesque:wght@200..800&display=swap" rel="stylesheet">
+<link rel="icon" href="images/logo.svg">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- grain / noise texture, decorative -->
+<svg class="noise" aria-hidden="true">
+  <filter id="grain">
+    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" result="noise" />
+    <feColorMatrix in="noise" type="matrix"
+      values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.9 0" />
+  </filter>
+  <rect width="100%" height="100%" filter="url(#grain)" />
+</svg>
+
+<!-- loader -->
+<div class="loader" id="loader" aria-hidden="true">
+  <svg class="loader__logo draw-logo" id="loaderLogo" width="129" height="46" viewBox="0 0 129 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path class="draw-dot" d="M52.7285 16.1703C52.7285 21.3995 51.4332 21.7808 47.118 21.7808C51.4332 21.7808 52.7285 22.3628 52.7285 27.3912C52.7285 22.3628 54.2939 21.7808 58.3389 21.7808C54.2624 21.7808 52.7285 21.4122 52.7285 16.1703Z" fill="#D9D9D9"/>
+    <path class="draw-line" pathLength="1" d="M52.7285 16.1703V4.92609M52.7285 40.6133L52.7285 27.3912C52.7285 22.3628 51.4332 21.7808 47.118 21.7808C51.4332 21.7808 52.7285 21.3995 52.7285 16.1703M52.7285 16.1703C52.7285 21.4122 54.2624 21.7808 58.3389 21.7808C54.2939 21.7808 52.7285 22.3628 52.7285 27.3912" stroke="#D9D9D9" stroke-width="1.7959" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="draw-line" pathLength="1" d="M4.87512 20.7836L4.87512 5.37168C4.87512 5.09741 5.09747 4.87506 5.37174 4.87506L20.2871 4.87506C20.5614 4.87506 20.7837 5.0974 20.7837 5.37168V20.7836" stroke="#D9D9D9" stroke-width="1.7959" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="draw-line" pathLength="1" d="M92.3723 4.87505L92.3723 20.287C92.3723 20.5613 92.15 20.7836 91.8757 20.7836L76.9603 20.7836C76.6861 20.7836 76.4637 20.5613 76.4637 20.287L76.4637 4.87505" stroke="#D9D9D9" stroke-width="1.7959" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="draw-line" pathLength="1" d="M24.5619 4.87506L48.127 4.87506C48.4013 4.87506 48.6237 5.0974 48.6237 5.37168L48.6237 17.1053C48.6237 17.3796 48.4013 17.6019 48.127 17.6019L24.7608 17.6019" stroke="#D9D9D9" stroke-width="1.7959" stroke-linejoin="round"/>
+    <path class="draw-line" pathLength="1" d="M96.3505 4.87506L119.717 4.87506C119.991 4.87506 120.213 5.09741 120.213 5.37168L120.213 17.1053C120.213 17.3796 119.991 17.6019 119.717 17.6019L96.3505 17.6019" stroke="#D9D9D9" stroke-width="1.7959" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="draw-line" pathLength="1" d="M4.87512 16.8065H20.7837" stroke="#D9D9D9" stroke-width="1.7959" stroke-linejoin="round"/>
+    <path class="draw-line" pathLength="1" d="M24.7609 4.87506L24.7609 20.7836" stroke="#D9D9D9" stroke-width="1.7959" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="draw-line" pathLength="1" d="M96.3494 4.87506V20.7836" stroke="#D9D9D9" stroke-width="1.7959" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="draw-line" pathLength="1" d="M37.4877 17.6019L40.6694 20.7836" stroke="#D9D9D9" stroke-width="1.7959" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="draw-line" pathLength="1" d="M109.275 17.6019L112.457 20.7836" stroke="#D9D9D9" stroke-width="1.7959" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="draw-line" pathLength="1" d="M60.5552 4.87506L60.5552 40.6694" stroke="#D9D9D9" stroke-width="1.7959" stroke-linecap="round"/>
+    <path class="draw-line" pathLength="1" d="M72.4866 4.87506L72.4866 40.6694" stroke="#D9D9D9" stroke-width="1.7959" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="draw-dot" d="M60.5552 21.9108C60.0593 21.9108 59.6572 22.3129 59.6572 22.8088C59.6572 23.3047 60.0593 23.7067 60.5552 23.7067V22.8088V21.9108ZM60.5552 22.8088V23.7067H72.4866V22.8088V21.9108H60.5552V22.8088Z" fill="#D9D9D9"/>
+    <path class="draw-line" pathLength="1" d="M32.7151 40.6694V24.933C32.7151 24.8636 32.7954 24.825 32.8496 24.8684L40.6177 31.0829C40.6479 31.1071 40.6909 31.1071 40.7211 31.0829L48.4892 24.8684C48.5434 24.825 48.6237 24.8636 48.6237 24.933V40.6694" stroke="#D9D9D9" stroke-width="1.7959" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="draw-line" pathLength="1" d="M76.4636 40.6694V24.9606C76.4636 24.8869 76.5528 24.85 76.6049 24.9021L92.2309 40.5281C92.2831 40.5802 92.3722 40.5433 92.3722 40.4696V24.7608" stroke="#D9D9D9" stroke-width="1.7959" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="draw-line" pathLength="1" d="M28.738 24.7608L5.04066 24.7608C4.94924 24.7608 4.87512 24.8349 4.87512 24.9263L4.87512 31.3737C4.87512 31.4651 4.94924 31.5393 5.04066 31.5393L28.5725 31.5393C28.6639 31.5393 28.738 31.6134 28.738 31.7048L28.738 40.5038C28.738 40.5953 28.6639 40.6694 28.5725 40.6694H4.87512" stroke="#D9D9D9" stroke-width="1.7959" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="draw-line" pathLength="1" d="M120.014 24.7608L96.3192 24.7608C96.227 24.7608 96.1525 24.8362 96.1537 24.9284L96.3473 40.5927C96.3485 40.6833 96.4222 40.7562 96.5129 40.7562H119.849C119.94 40.7562 120.014 40.6821 120.014 40.5906V31.6095C120.014 31.5181 119.94 31.444 119.849 31.444L100.491 31.444" stroke="#D9D9D9" stroke-width="1.7959" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect class="draw-line" pathLength="1" x="0.897949" y="0.897949" width="123.292" height="43.7486" rx="4.08792" stroke="#D9D9D9" stroke-width="1.7959"/>
+    <rect class="draw-dot" x="125.807" y="42.287" width="2.35949" height="2.35949" rx="1.17974" fill="#D9D9D9"/>
+  </svg>
+  <div class="loader__label" data-i18n="loader.label">preparando el trabajo</div>
+</div>
+
+<!-- custom cursor -->
+<div class="cursor" id="cursor" aria-hidden="true">
+  <span class="cursor__label" id="cursorLabel"></span>
+</div>
+
+<!-- click-to-magnify lens -->
+<div class="magnifier" id="magnifier" aria-hidden="true"></div>
+
+<!-- fullscreen lightbox — click any piece to see it large, works on touch too -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lightbox__close" id="lightboxClose" aria-label="Cerrar" data-cursor="close" data-i18n="lightbox.close" data-i18n-aria="lightbox.close">Cerrar</button>
+  <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Pieza anterior" data-cursor="prev" data-i18n-aria="lightbox.prevAria">&larr;</button>
+  <button class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Pieza siguiente" data-cursor="next" data-i18n-aria="lightbox.nextAria">&rarr;</button>
+  <figure class="lightbox__figure">
+    <img class="lightbox__img" id="lightboxImg" src="" alt="" />
+    <figcaption class="lightbox__caption" id="lightboxCaption"></figcaption>
+  </figure>
+</div>
+
+<!-- progress rail -->
+<div class="rail" aria-hidden="true"><div class="rail__fill" id="railFill"></div></div>
+
+<header class="site-header" data-reveal-nav>
+  <a class="site-header__mark" href="#top" data-cursor="home" data-i18n-cursor="cursor.home"><img src="images/logo.svg" alt="Arthur" /></a>
+  <div class="site-header__actions">
+    <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch language" data-i18n="lang.switchTo">EN</button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero__scrollcue" aria-hidden="true">
+      <div class="hero__scrollcue-track"><span data-i18n="hero.scrollcue">DESPLÁZATE — EXPLORA — DESPLÁZATE — EXPLORA — </span><span data-i18n="hero.scrollcue">DESPLÁZATE — EXPLORA — DESPLÁZATE — EXPLORA — </span></div>
+    </div>
+    <h1 class="hero__title">
+      <a href="#top" aria-label="Arthur — inicio" data-i18n-aria="aria.home">
+        <svg class="hero__logo draw-logo" id="heroLogo" aria-hidden="true" width="129" height="46" viewBox="0 0 129 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path class="draw-dot" d="M52.7285 16.1703C52.7285 21.3995 51.4332 21.7808 47.118 21.7808C51.4332 21.7808 52.7285 22.3628 52.7285 27.3912C52.7285 22.3628 54.2939 21.7808 58.3389 21.7808C54.2624 21.7808 52.7285 21.4122 52.7285 16.1703Z" fill="#D9D9D9"/>
+    <path class="draw-line" pathLength="1" d="M52.7285 16.1703V4.92609M52.7285 40.6133L52.7285 27.3912C52.7285 22.3628 51.4332 21.7808 47.118 21.7808C51.4332 21.7808 52.7285 21.3995 52.7285 16.1703M52.7285 16.1703C52.7285 21.4122 54.2624 21.7808 58.3389 21.7808C54.2939 21.7808 52.7285 22.3628 52.7285 27.3912" stroke="#D9D9D9" stroke-width="1.7959" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="draw-line" pathLength="1" d="M4.87512 20.7836L4.87512 5.37168C4.87512 5.09741 5.09747 4.87506 5.37174 4.87506L20.2871 4.87506C20.5614 4.87506 20.7837 5.0974 20.7837 5.37168V20.7836" stroke="#D9D9D9" stroke-width="1.7959" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="draw-line" pathLength="1" d="M92.3723 4.87505L92.3723 20.287C92.3723 20.5613 92.15 20.7836 91.8757 20.7836L76.9603 20.7836C76.6861 20.7836 76.4637 20.5613 76.4637 20.287L76.4637 4.87505" stroke="#D9D9D9" stroke-width="1.7959" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="draw-line" pathLength="1" d="M24.5619 4.87506L48.127 4.87506C48.4013 4.87506 48.6237 5.0974 48.6237 5.37168L48.6237 17.1053C48.6237 17.3796 48.4013 17.6019 48.127 17.6019L24.7608 17.6019" stroke="#D9D9D9" stroke-width="1.7959" stroke-linejoin="round"/>
+    <path class="draw-line" pathLength="1" d="M96.3505 4.87506L119.717 4.87506C119.991 4.87506 120.213 5.09741 120.213 5.37168L120.213 17.1053C120.213 17.3796 119.991 17.6019 119.717 17.6019L96.3505 17.6019" stroke="#D9D9D9" stroke-width="1.7959" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="draw-line" pathLength="1" d="M4.87512 16.8065H20.7837" stroke="#D9D9D9" stroke-width="1.7959" stroke-linejoin="round"/>
+    <path class="draw-line" pathLength="1" d="M24.7609 4.87506L24.7609 20.7836" stroke="#D9D9D9" stroke-width="1.7959" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="draw-line" pathLength="1" d="M96.3494 4.87506V20.7836" stroke="#D9D9D9" stroke-width="1.7959" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="draw-line" pathLength="1" d="M37.4877 17.6019L40.6694 20.7836" stroke="#D9D9D9" stroke-width="1.7959" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="draw-line" pathLength="1" d="M109.275 17.6019L112.457 20.7836" stroke="#D9D9D9" stroke-width="1.7959" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="draw-line" pathLength="1" d="M60.5552 4.87506L60.5552 40.6694" stroke="#D9D9D9" stroke-width="1.7959" stroke-linecap="round"/>
+    <path class="draw-line" pathLength="1" d="M72.4866 4.87506L72.4866 40.6694" stroke="#D9D9D9" stroke-width="1.7959" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="draw-dot" d="M60.5552 21.9108C60.0593 21.9108 59.6572 22.3129 59.6572 22.8088C59.6572 23.3047 60.0593 23.7067 60.5552 23.7067V22.8088V21.9108ZM60.5552 22.8088V23.7067H72.4866V22.8088V21.9108H60.5552V22.8088Z" fill="#D9D9D9"/>
+    <path class="draw-line" pathLength="1" d="M32.7151 40.6694V24.933C32.7151 24.8636 32.7954 24.825 32.8496 24.8684L40.6177 31.0829C40.6479 31.1071 40.6909 31.1071 40.7211 31.0829L48.4892 24.8684C48.5434 24.825 48.6237 24.8636 48.6237 24.933V40.6694" stroke="#D9D9D9" stroke-width="1.7959" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="draw-line" pathLength="1" d="M76.4636 40.6694V24.9606C76.4636 24.8869 76.5528 24.85 76.6049 24.9021L92.2309 40.5281C92.2831 40.5802 92.3722 40.5433 92.3722 40.4696V24.7608" stroke="#D9D9D9" stroke-width="1.7959" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="draw-line" pathLength="1" d="M28.738 24.7608L5.04066 24.7608C4.94924 24.7608 4.87512 24.8349 4.87512 24.9263L4.87512 31.3737C4.87512 31.4651 4.94924 31.5393 5.04066 31.5393L28.5725 31.5393C28.6639 31.5393 28.738 31.6134 28.738 31.7048L28.738 40.5038C28.738 40.5953 28.6639 40.6694 28.5725 40.6694H4.87512" stroke="#D9D9D9" stroke-width="1.7959" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="draw-line" pathLength="1" d="M120.014 24.7608L96.3192 24.7608C96.227 24.7608 96.1525 24.8362 96.1537 24.9284L96.3473 40.5927C96.3485 40.6833 96.4222 40.7562 96.5129 40.7562H119.849C119.94 40.7562 120.014 40.6821 120.014 40.5906V31.6095C120.014 31.5181 119.94 31.444 119.849 31.444L100.491 31.444" stroke="#D9D9D9" stroke-width="1.7959" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect class="draw-line" pathLength="1" x="0.897949" y="0.897949" width="123.292" height="43.7486" rx="4.08792" stroke="#D9D9D9" stroke-width="1.7959"/>
+    <rect class="draw-dot" x="125.807" y="42.287" width="2.35949" height="2.35949" rx="1.17974" fill="#D9D9D9"/>
+  </svg>
+      </a>
+    </h1>
+    <p class="hero__handle" data-split-lines>@Arttoor_cs by Arthur Something</p>
+    <p class="hero__tag" data-split-lines data-i18n="hero.tagline">Ilustración y narrativa visual. Ciudad de México.</p>
+  </section>
+
+  <!-- STATEMENT -->
+  <section class="statement">
+    <p class="statement__text" data-split-lines data-i18n="statement.text">
+      Un rostro, una planta, una idea a medio formar. Me da curiosidad
+      algo y dibujo hasta que tiene sentido.
+    </p>
+  </section>
+
+  <!-- BENTO — every faces + concepts piece, tiled into a gapless bento
+       grid (explicit CSS grid placement computed in JS) -->
+  <section class="bento" id="featured">
+    <div class="bento__head">
+      <span class="bento__title" data-i18n="bento.title">Piezas seleccionadas</span>
+      <span class="bento__hint" data-i18n="bento.hint">rostros y conceptos. Clic para ver, clic derecho para zoom</span>
+    </div>
+    <div data-bento-root></div>
+  </section>
+
+  <!-- FAUNA — flying-card carousel -->
+  <section class="carousel-section" id="fauna">
+    <div class="carousel-section__head">
+      <div class="carousel-section__heading-row">
+        <span class="carousel-section__title" data-i18n="fauna.title">Fauna</span>
+        <span class="carousel-section__hint" data-i18n="fauna.hint">arrastra para explorar · clic para ver, clic derecho para zoom</span>
+      </div>
+      <p class="carousel-section__desc" data-i18n="fauna.desc">Estudios de animales centrados en el gesto y el peso, observando cómo una criatura se sostiene y se mueve antes de que esa observación se convierta en una pieza terminada.</p>
+    </div>
+    <div class="flying-carousel" data-carousel data-carousel-category="fauna">
+      <div class="flying-carousel__track" data-carousel-track></div>
+    </div>
+    <p class="flying-carousel__caption" data-carousel-caption></p>
+  </section>
+
+  <!-- FLORA — flying-card carousel -->
+  <section class="carousel-section" id="flora">
+    <div class="carousel-section__head">
+      <div class="carousel-section__heading-row">
+        <span class="carousel-section__title" data-i18n="flora.title">Flora</span>
+        <span class="carousel-section__hint" data-i18n="flora.hint">arrastra para explorar · clic para ver, clic derecho para zoom</span>
+      </div>
+      <p class="carousel-section__desc" data-i18n="flora.desc">Estudios botánicos de patrón, crecimiento y luz: observación rápida de formas vegetales refinada en líneas detalladas y color.</p>
+    </div>
+    <div class="flying-carousel" data-carousel data-carousel-category="flora">
+      <div class="flying-carousel__track" data-carousel-track></div>
+    </div>
+    <p class="flying-carousel__caption" data-carousel-caption></p>
+  </section>
+
+  <!-- ANATOMY — gesture &amp; study sketches, flying-card carousel -->
+  <section class="carousel-section" id="anatomy">
+    <div class="carousel-section__head">
+      <div class="carousel-section__heading-row">
+        <span class="carousel-section__title" data-i18n="anatomy.title">Anatomía</span>
+        <span class="carousel-section__hint" data-i18n="anatomy.hint">arrastra para explorar · clic para ver, clic derecho para zoom</span>
+      </div>
+      <p class="carousel-section__desc" data-i18n="anatomy.desc">Estudios rápidos y exploratorios de gesto y anatomía: la práctica de entender estructura, proporción y movimiento que sostiene cada pieza terminada de arriba.</p>
+    </div>
+    <div class="flying-carousel" data-carousel data-carousel-category="anatomy">
+      <div class="flying-carousel__track" data-carousel-track></div>
+    </div>
+    <p class="flying-carousel__caption" data-carousel-caption></p>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about__col">
+      <p class="about__text" data-split-lines data-i18n="about.text">
+        Todo aquí está dibujado digitalmente en Procreate. Me engancha
+        la libertad que da: no hay material que desperdiciar, así que
+        hay espacio para el error, para corregir sin miedo, para
+        explorar colores y texturas hasta encontrar algo que valga la
+        pena. Nunca estudié arte. Crecí dibujando lo que fuera que
+        tuviera en la cabeza, y sigo trabajando igual. La inspiración
+        puede venir de cualquier lado: una escena, una frase, una
+        palabra, un momento, un recuerdo, un sabor.
+      </p>
+    </div>
+    <div class="about__col about__meta">
+      <div class="about__meta-group">
+        <span class="about__meta-label" data-i18n="about.tools.label">Herramientas</span>
+        <span class="about__meta-value">Procreate</span>
+      </div>
+      <div class="about__meta-group">
+        <span class="about__meta-label" data-i18n="about.location.label">Ubicado en</span>
+        <span class="about__meta-value" data-i18n="location.city">Ciudad de México</span>
+      </div>
+      <div class="about__meta-group">
+        <span class="about__meta-label" data-i18n="about.available.label">Disponible para</span>
+        <span class="about__meta-value" data-i18n="about.available.value">Editorial, portadas, colaboraciones</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <p class="contact__pre" data-i18n="contact.pre">¿Tienes algo en mente?</p>
+    <a class="contact__link" href="https://instagram.com/arttoor_cs" target="_blank" rel="noopener noreferrer" data-magnetic data-cursor="say hi" data-i18n-cursor="cursor.sayhi" data-i18n="contact.cta">
+      Hablemos
+    </a>
+    <div class="contact__socials">
+      <a href="https://instagram.com/arttoor_cs" target="_blank" rel="noopener noreferrer">@arttoor_cs</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <span>&copy; <span id="year"></span> Arthur</span>
+  <a href="#top" data-cursor="top" data-i18n-cursor="cursor.top" data-i18n="footer.backtotop">Back to top ↑</a>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="js/data.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

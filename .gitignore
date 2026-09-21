@@ -1,0 +1,12 @@
+node_modules/
+.DS_Store
+Thumbs.db
+.claude/
+
+# Superseded single-file version, split into index.html/css/js
+arthur-portfolio.html
+
+# Raw upscaled source PNGs (multi-hundred-MB each) used to produce the
+# optimized images/works and images/sketches webp files — not served by
+# the site itself.
+images/mejoradas/

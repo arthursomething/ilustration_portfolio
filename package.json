@@ -1,0 +1,9 @@
+{
+  "name": "arthur-portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Arthur — illustration portfolio",
+  "scripts": {
+    "dev": "node server.js"
+  }
+}
