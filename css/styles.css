@@ -420,19 +420,24 @@ html.is-lightbox-open{ overflow: hidden; }
 }
 .print-card{
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  grid-template-columns: minmax(0, 380px) minmax(0, 1fr);
   gap: clamp(24px, 4vw, 56px);
   align-items: start;
+}
+.print-card__gallery{
+  max-width: 380px;
 }
 .print-card__main{
   display: block;
   overflow: hidden;
+  aspect-ratio: 4 / 5;
 }
 .print-card__main img{
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
   object-fit: cover;
+  object-position: center 30%;
 }
 .print-card__thumbs{
   display: flex;
@@ -522,6 +527,9 @@ html.is-lightbox-open{ overflow: hidden; }
 @media (max-width: 760px){
   .print-card{
     grid-template-columns: 1fr;
+  }
+  .print-card__gallery{
+    max-width: 100%;
   }
 }
 
