@@ -20,8 +20,8 @@
 window.PRINTS = [
   {
     id: "01",
-    title: "Flowers in a Jar",
-    titleEs: "Flores en un Frasco",
+    title: "Elegant Vase",
+    titleEs: "Florero Elegante",
     price: 250,
     currency: "MXN",
     medium: "Screen print on textured paper, hand-finished details",
