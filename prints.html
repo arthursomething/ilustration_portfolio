@@ -37,17 +37,20 @@
 
 <main id="top">
 
-  <!-- PRINTS / CATALOG — empty for now; real pieces get added here once
-       photos + specs are ready (see js/prints.js for the render hook). -->
+  <!-- PRINTS / CATALOG — real pieces render into [data-prints-root] from
+       js/prints-data.js; [data-prints-empty] shows instead whenever that
+       list is empty (see js/prints.js). -->
   <section class="prints">
-    <span class="prints__eyebrow" data-i18n="prints.eyebrow">Impresiones y pre-ventas</span>
-    <h1 class="prints__title" data-i18n="prints.title">Impresiones</h1>
-    <p class="prints__lede" data-i18n="prints.lede">
-      Impresiones firmadas y pre-ventas de piezas originales, con entrega
-      en persona en Ciudad de México.
-    </p>
+    <div class="prints__intro">
+      <span class="prints__eyebrow" data-i18n="prints.eyebrow">Impresiones y pre-ventas</span>
+      <h1 class="prints__title" data-i18n="prints.title">Impresiones</h1>
+      <p class="prints__lede" data-i18n="prints.lede">
+        Impresiones firmadas y pre-ventas de piezas originales, con entrega
+        en persona en Ciudad de México.
+      </p>
+    </div>
 
-    <div class="prints__empty" data-prints-empty>
+    <div class="prints__empty" data-prints-empty hidden>
       <p data-i18n="prints.empty">
         Todavía no hay piezas publicadas. Estoy preparando el catálogo.
         Vuelve pronto o sígueme en Instagram para enterarte primero.
@@ -55,7 +58,7 @@
       <a class="prints__empty-link" href="https://instagram.com/arttoor_cs" target="_blank" rel="noopener noreferrer">@arttoor_cs</a>
     </div>
 
-    <div class="prints__grid" data-prints-root hidden></div>
+    <div class="prints__grid" data-prints-root></div>
   </section>
 
 </main>
@@ -66,6 +69,7 @@
 </footer>
 
 <script src="js/i18n.js"></script>
+<script src="js/prints-data.js"></script>
 <script src="js/prints.js"></script>
 </body>
 </html>
