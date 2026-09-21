@@ -25,7 +25,7 @@ window.PRINTS = [
     price: 250,
     currency: "MXN",
     medium: "Screen print on textured paper, hand-finished details",
-    mediumEs: "Cerigrafía sobre papel texturizado, con detalles hechos a mano",
+    mediumEs: "Serigrafía sobre papel texturizado, con detalles hechos a mano",
     size: "28 × 21 cm",
     note: "One physical piece. Delivered in person in Mexico City",
     noteEs: "Pieza física. Entrega en persona en Ciudad de México",

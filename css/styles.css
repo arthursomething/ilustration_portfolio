@@ -301,7 +301,12 @@ html.is-lightbox-open{ overflow: hidden; }
   align-items: center;
   justify-content: space-between;
   padding: clamp(18px, 3vw, 30px) var(--edge);
-  mix-blend-mode: difference;
+  /* mix-blend-mode: difference used to handle this by inverting against
+     whatever sat underneath, but that only reads cleanly over flat dark
+     or flat light backgrounds — over busier content (photos, mid-tone
+     grays) the header visibly blends into it instead of standing out.
+     A solid scrim is less clever but never fails to stay legible. */
+  background: linear-gradient(to bottom, rgba(11,11,12,0.85) 0%, rgba(11,11,12,0.5) 65%, rgba(11,11,12,0) 100%);
 }
 .site-header__mark{
   display: block;
