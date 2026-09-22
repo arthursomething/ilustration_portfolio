@@ -54,7 +54,7 @@ window.PRINTS = [
     id: "02",
     title: "Shawn James Mexico 2026",
     titleEs: "Shawn James Mexico 2026",
-    price: 300,
+    price: 348,
     currency: "MXN",
     medium: "Risograph print, one ink color, on 200gsm Bristol paper",
     mediumEs: "Risografía, un color de tinta, sobre papel Bristol de 200gr",
