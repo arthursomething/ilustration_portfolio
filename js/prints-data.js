@@ -9,7 +9,11 @@
  *    in the session scratchpad; ask for it again if you need it, or
  *    just resize to ~1200w display / ~480w small / original-w full).
  * 2. Add an entry here with title/titleEs, price, medium/mediumEs,
- *    size, note/noteEs and the images array.
+ *    size (sizeEs optional, only needed if the size text itself
+ *    contains words to translate, e.g. "Tabloid"), note/noteEs and the
+ *    images array. images can point straight at an existing WORKS
+ *    image (js/data.js) instead of a new photo shoot, e.g. for a
+ *    pre-order poster of a piece that hasn't been printed yet.
  * 3. Set buyUrl to the Stripe Payment Link for this piece once created
  *    (stripe.com/payment-links — no code needed, just a product + a
  *    price in the Stripe dashboard). Leave it "" to show "Coming soon"
@@ -45,5 +49,21 @@ window.PRINTS = [
     ],
     buyUrl: "https://buy.stripe.com/9B628kgSWg9Zehi9Cg5sA00",
     portfolioId: "33",
+  },
+  {
+    id: "02",
+    title: "Hourglass",
+    titleEs: "Reloj de Arena",
+    price: 300,
+    currency: "MXN",
+    medium: "Risograph print, one ink color, on 200gsm Bristol paper",
+    mediumEs: "Risografía, un color de tinta, sobre papel Bristol de 200gr",
+    size: "Tabloid (28 × 43 cm)",
+    sizeEs: "Tabloide (28 × 43 cm)",
+    note: "Pre-order. Printed once orders are in, delivered in person in Mexico City",
+    noteEs: "Pre-venta. Se imprime una vez recibidos los pedidos, con entrega en persona en Ciudad de México",
+    images: ["images/works/11.webp"],
+    buyUrl: "",
+    portfolioId: "11",
   },
 ];

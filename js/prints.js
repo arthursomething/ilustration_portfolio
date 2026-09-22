@@ -25,6 +25,9 @@
   function printNote(p) {
     return currentLang === "es" && p.noteEs ? p.noteEs : p.note;
   }
+  function printSize(p) {
+    return currentLang === "es" && p.sizeEs ? p.sizeEs : p.size;
+  }
 
   // Every print photo also has -small (~480w) and -full (original res)
   // siblings, generated the same way as the portfolio's own images.
@@ -69,7 +72,7 @@
         <div class="print-card__info">
           <h2 class="print-card__title">${title}</h2>
           <p class="print-card__medium">${printMedium(p)}</p>
-          <p class="print-card__size">${p.size}</p>
+          <p class="print-card__size">${printSize(p)}</p>
           <p class="print-card__note">${printNote(p)}</p>
           <div class="print-card__price">$${p.price} ${p.currency}</div>
           ${buy}
@@ -327,6 +330,7 @@
       if (!p) return;
       card.querySelector(".print-card__title").textContent = printTitle(p);
       card.querySelector(".print-card__medium").textContent = printMedium(p);
+      card.querySelector(".print-card__size").textContent = printSize(p);
       card.querySelector(".print-card__note").textContent = printNote(p);
       const mainImg = card.querySelector("[data-main-img]");
       if (mainImg) mainImg.alt = printTitle(p);

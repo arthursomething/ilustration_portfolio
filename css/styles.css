@@ -17,7 +17,7 @@
   --accent: #822cdb;
   --line: rgba(242,241,236,0.14);
 
-  --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --display: "Epilogue", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --sans: "Bricolage Grotesque", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   --edge: clamp(20px, 4.2vw, 64px);
@@ -371,9 +371,8 @@ html.is-lightbox-open{ overflow: hidden; }
   color: var(--fg-mute);
 }
 .prints__title{
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 400;
+  font-family: var(--display);
+  font-weight: 700;
   font-size: clamp(44px, 8vw, 96px);
   line-height: 1.05;
   color: var(--fg);
@@ -495,9 +494,8 @@ html.is-lightbox-open{ overflow: hidden; }
   padding-top: clamp(4px, 1vw, 12px);
 }
 .print-card__title{
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 400;
+  font-family: var(--display);
+  font-weight: 700;
   font-size: clamp(28px, 3.4vw, 40px);
   color: var(--fg);
   margin: 0 0 clamp(10px, 1.6vw, 16px);
@@ -633,8 +631,8 @@ section{ position: relative; }
 .statement__text{
   max-width: 20ch;
   margin: 0 auto;
-  font-family: var(--serif);
-  font-weight: 400;
+  font-family: var(--display);
+  font-weight: 700;
   font-size: clamp(30px, 5.4vw, 64px);
   line-height: 1.18;
   text-align: center;
@@ -659,10 +657,9 @@ section{ position: relative; }
   padding-bottom: clamp(24px, 4vw, 40px);
 }
 .bento__title{
-  font-family: var(--serif);
-  font-style: italic;
+  font-family: var(--display);
   font-size: clamp(28px, 4vw, 44px);
-  font-weight: 400;
+  font-weight: 700;
   color: var(--fg);
 }
 .bento__hint{
@@ -775,10 +772,9 @@ section{ position: relative; }
   flex-wrap: wrap;
 }
 .carousel-section__title{
-  font-family: var(--serif);
-  font-style: italic;
+  font-family: var(--display);
   font-size: clamp(38px, 5.8vw, 68px);
-  font-weight: 400;
+  font-weight: 700;
   color: var(--fg);
 }
 .carousel-section__hint{
@@ -853,7 +849,8 @@ section{ position: relative; }
   border-top: 1px solid var(--line);
 }
 .about__text{
-  font-family: var(--serif);
+  font-family: var(--display);
+  font-weight: 700;
   font-size: clamp(22px, 3vw, 34px);
   line-height: 1.32;
   color: var(--fg-dim);
@@ -896,8 +893,8 @@ section{ position: relative; }
   color: var(--fg-mute);
 }
 .contact__link{
-  font-family: var(--serif);
-  font-style: italic;
+  font-family: var(--display);
+  font-weight: 700;
   font-size: clamp(56px, 11vw, 160px);
   line-height: 1;
   display: inline-block;
