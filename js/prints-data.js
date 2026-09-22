@@ -52,8 +52,8 @@ window.PRINTS = [
   },
   {
     id: "02",
-    title: "Hourglass",
-    titleEs: "Reloj de Arena",
+    title: "Shawn James Mexico 2026",
+    titleEs: "Shawn James Mexico 2026",
     price: 300,
     currency: "MXN",
     medium: "Risograph print, one ink color, on 200gsm Bristol paper",
