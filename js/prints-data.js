@@ -17,7 +17,9 @@
  * 3. Set buyUrl to the Stripe Payment Link for this piece once created
  *    (stripe.com/payment-links — no code needed, just a product + a
  *    price in the Stripe dashboard). Leave it "" to show "Coming soon"
- *    instead of a working buy button.
+ *    instead of a working buy button. If the piece is on sale, keep the
+ *    old total in originalPrice — js/prints.js shows it struck through
+ *    next to price with the discount % computed from the two.
  * 4. portfolioId is optional — set it to a WORKS id (js/data.js) to
  *    link back to the original digital piece, if there is one.
  * 5. images[0] is used as the card's main photo (see .print-card__main
@@ -33,7 +35,8 @@ window.PRINTS = [
     id: "01",
     title: "Elegant Vase",
     titleEs: "Florero Elegante",
-    price: 250,
+    price: 150,
+    originalPrice: 250,
     currency: "MXN",
     medium: "Screen print on textured paper, hand-finished details",
     mediumEs: "Serigrafía sobre papel texturizado, con detalles hechos a mano",
@@ -54,7 +57,8 @@ window.PRINTS = [
     id: "02",
     title: "Shawn James Mexico 2026",
     titleEs: "Shawn James Mexico 2026",
-    price: 348,
+    price: 250,
+    originalPrice: 348,
     currency: "MXN",
     medium: "Risograph print, one ink color, on 200gsm Bristol paper",
     mediumEs: "Risografía, un color de tinta, sobre papel Bristol de 200gr",

@@ -514,10 +514,29 @@ html.is-lightbox-open{ overflow: hidden; }
   letter-spacing: 0.02em;
 }
 .print-card__price{
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px;
   font-family: var(--sans);
   font-size: 22px;
   color: var(--fg);
   margin: clamp(16px, 2.4vw, 24px) 0 clamp(16px, 2.4vw, 24px);
+}
+.print-card__price-original{
+  font-size: 15px;
+  color: var(--fg-mute);
+  text-decoration: line-through;
+}
+.print-card__price-discount{
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  padding: 2px 8px;
 }
 .print-card__buy{
   display: inline-block;

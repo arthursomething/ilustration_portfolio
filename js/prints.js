@@ -28,6 +28,18 @@
   function printSize(p) {
     return currentLang === "es" && p.sizeEs ? p.sizeEs : p.size;
   }
+  function printPrice(p) {
+    if (!p.originalPrice || p.originalPrice <= p.price) {
+      return `<div class="print-card__price">$${p.price} ${p.currency}</div>`;
+    }
+    const discount = Math.round((1 - p.price / p.originalPrice) * 100);
+    return `
+      <div class="print-card__price">
+        <span class="print-card__price-original">$${p.originalPrice} ${p.currency}</span>
+        <span class="print-card__price-current">$${p.price} ${p.currency}</span>
+        <span class="print-card__price-discount">-${discount}%</span>
+      </div>`;
+  }
 
   // Every print photo also has -small (~480w) and -full (original res)
   // siblings, generated the same way as the portfolio's own images.
@@ -74,7 +86,7 @@
           <p class="print-card__medium">${printMedium(p)}</p>
           <p class="print-card__size">${printSize(p)}</p>
           <p class="print-card__note">${printNote(p)}</p>
-          <div class="print-card__price">$${p.price} ${p.currency}</div>
+          ${printPrice(p)}
           ${buy}
         </div>
       </article>`;
