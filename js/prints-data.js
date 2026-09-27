@@ -47,7 +47,7 @@ window.PRINTS = [
       "images/prints/print-01-04.webp",
       "images/prints/print-01-05.webp",
     ],
-    buyUrl: "https://buy.stripe.com/9B628kgSWg9Zehi9Cg5sA00",
+    buyUrl: "https://buy.stripe.com/8x2eV69quaPFehicOs5sA02",
     portfolioId: "33",
   },
   {
