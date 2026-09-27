@@ -63,7 +63,7 @@ window.PRINTS = [
     note: "Pre-order. Printed once orders are in, delivered in person in Mexico City",
     noteEs: "Pre-venta. Se imprime una vez recibidos los pedidos, con entrega en persona en Ciudad de México",
     images: ["images/works/11.webp"],
-    buyUrl: "https://buy.stripe.com/eVqaEQdGK0b1c9a5m05sA01",
+    buyUrl: "https://buy.stripe.com/14AdR29qug9Zc9ag0E5sA03",
     portfolioId: "11",
   },
 ];
