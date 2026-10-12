@@ -130,6 +130,7 @@
   const CAROUSEL_SOURCES = {
     fauna: () => WORKS.filter((w) => w.category === "fauna").map((w) => ({ id: w.id, image: w.image })),
     flora: () => WORKS.filter((w) => w.category === "flora").map((w) => ({ id: w.id, image: w.image })),
+    biketubre: () => WORKS.filter((w) => w.category === "biketubre").map((w) => ({ id: w.id, image: w.image })),
     anatomy: () => SKETCHES.map((s, i) => ({ num: i + 1, image: s.image })),
   };
 

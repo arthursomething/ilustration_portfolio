@@ -20,7 +20,8 @@ window.CATEGORIES = [
   { slug: "faces", label: "Faces" },
   { slug: "concepts", label: "Concepts" },
   { slug: "fauna", label: "Fauna" },
-  { slug: "flora", label: "Flora" }];
+  { slug: "flora", label: "Flora" },
+  { slug: "biketubre", label: "Biketubre" }];
 
 window.WORKS = [
   { id: "01", title: "Portrait — Warm Contrast", titleEs: "Retrato en Contraste Cálido", year: "", medium: "Illustration", note: "", image: "images/works/01.webp", category: "faces", featured: true },
@@ -59,7 +60,17 @@ window.WORKS = [
   { id: "34", title: "Flower Stem", titleEs: "Tallo de Flor", year: "", medium: "Illustration", note: "", image: "images/works/34.webp", category: "flora", featured: false },
   { id: "35", title: "Rose Pattern", titleEs: "Patrón de Rosas", year: "", medium: "Illustration", note: "", image: "images/works/35.webp", category: "flora", featured: false },
   { id: "36", title: "Eagle & Serpent", titleEs: "Águila y Serpiente", year: "", medium: "Illustration", note: "", image: "images/works/36.webp", category: "concepts", featured: false, bw: true },
-  { id: "37", title: "Carousel Horse", titleEs: "Caballo de Carrusel", year: "", medium: "Illustration", note: "", image: "images/works/37.webp", category: "concepts", featured: false, bw: true }
+  { id: "37", title: "Carousel Horse", titleEs: "Caballo de Carrusel", year: "", medium: "Illustration", note: "", image: "images/works/37.webp", category: "concepts", featured: false, bw: true },
+  { id: "38", title: "We're Almost There", titleEs: "Ya Casi Llegamos", year: "", medium: "Illustration", note: "", image: "images/biketubre/38.webp", category: "biketubre", featured: false },
+  { id: "39", title: "Every Race Is Against Yourself", titleEs: "Toda Carrera Es Contra Ti Mism@", year: "", medium: "Illustration", note: "", image: "images/biketubre/39.webp", category: "biketubre", featured: false },
+  { id: "40", title: "I Think I'll Be Late", titleEs: "Creo Que Voy a Llegar Tarde", year: "", medium: "Illustration", note: "", image: "images/biketubre/40.webp", category: "biketubre", featured: false },
+  { id: "41", title: "Pack What Matters, Keep Going", titleEs: "Empaca Lo Que Importa y Sigue Adelante", year: "", medium: "Illustration", note: "", image: "images/biketubre/41.webp", category: "biketubre", featured: false },
+  { id: "42", title: "As Far As the Legs Can Take You", titleEs: "Hasta Donde Las Piernas Aguanten", year: "", medium: "Illustration", note: "", image: "images/biketubre/42.webp", category: "biketubre", featured: false },
+  { id: "43", title: "The Ice Cream Vendor", titleEs: "El Paletero", year: "", medium: "Illustration", note: "", image: "images/biketubre/43.webp", category: "biketubre", featured: false },
+  { id: "44", title: "Helmet Up", titleEs: "Casco Puesto", year: "", medium: "Illustration", note: "", image: "images/biketubre/44.webp", category: "biketubre", featured: false },
+  { id: "45", title: "Monument to the Great Pothole", titleEs: "Monumento al Gran Bache", year: "", medium: "Illustration", note: "", image: "images/biketubre/45.webp", category: "biketubre", featured: false },
+  { id: "46", title: "Shut Up Legs", titleEs: "Shut Up Legs", year: "", medium: "Illustration", note: "", image: "images/biketubre/46.webp", category: "biketubre", featured: false },
+  { id: "47", title: "Track!", titleEs: "¡Pista!", year: "", medium: "Illustration", note: "", image: "images/biketubre/47.webp", category: "biketubre", featured: false }
 ];
 
 window.SKETCHES = [
