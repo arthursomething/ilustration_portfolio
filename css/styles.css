@@ -53,9 +53,58 @@ body{
 
 a{ color: inherit; text-decoration: none; }
 
-img{ max-width: 100%; display: block; }
+/* Casual-save deterrents, not real protection — anything rendered to a
+   screen can still be screenshotted, and devtools' Network tab always has
+   the real file regardless of any of this (see js/no-save.js for the
+   fuller note). This just removes the two one-click paths: dragging an
+   image out to the desktop, and iOS's long-press "Save to Photos" sheet. */
+img{
+  max-width: 100%;
+  display: block;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+}
 
 ::selection{ background: var(--fg); color: var(--bg); }
+
+/* ---------- three.js ambient background (js/three-bg.js) — a single
+   fixed canvas behind every section for the whole scroll. Explicitly
+   stacked below the actual content (see main/.site-footer below) rather
+   than relying on a negative z-index trick, so there's no ambiguity
+   about painting order. Desktop/pointer-fine only; the script itself
+   no-ops on touch and prefers-reduced-motion, so this rule just guards
+   against a flash of an empty canvas element before that JS decides not
+   to mount anything. ---------- */
+.three-bg{
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.2s var(--ease);
+}
+.three-bg.is-in{ opacity: 1; }
+main, .site-footer{
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- three.js bento hover-distortion (js/three-hover.js) — one
+   shared canvas/plane reused for whichever image is currently hovered,
+   faded in over the real <img> (which itself fades to opacity:0, see
+   .is-distorting below) rather than stacked on top of it, so only one
+   of the two is ever visible at a time. Sits above ordinary content but
+   below the header/cursor/lightbox layers (z-index 70+). ---------- */
+.three-hover{
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .3s var(--ease);
+}
+.three-hover.is-active{ opacity: 1; }
+.bento__item.is-distorting img{ opacity: 0; }
 
 /* ---------- grain overlay ---------- */
 .noise{
@@ -715,6 +764,7 @@ section{ position: relative; }
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: opacity .25s var(--ease);
 }
 .bento__item--full img{
   /* the wide crop is far more aggressive than the 3/4 grid's — center

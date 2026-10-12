@@ -320,6 +320,14 @@
     function unlockScroll() {
       document.documentElement.classList.remove("is-intro-locked");
       if (lenis) lenis.start();
+      // Public hook for anything outside this file that wants to hold off
+      // until the intro is actually done — e.g. js/three-bg.js fades its
+      // canvas in on this instead of just rendering the instant it loads,
+      // so the particle field doesn't pop in out of step with the rest of
+      // the reveal. window.__introComplete covers a listener registered
+      // too late to catch the event (see the flag's own comment there).
+      window.__introComplete = true;
+      window.dispatchEvent(new Event("portfolio:introend"));
     }
 
     if (!window.gsap || !document.getElementById("heroLogo")) {
