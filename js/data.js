@@ -24,6 +24,8 @@ window.CATEGORIES = [
   { slug: "biketubre", label: "Biketubre" }];
 
 window.WORKS = [
+  { id: "48", title: "Guarded Idol", titleEs: "Ídolo Custodiado", year: "", medium: "Illustration", note: "", image: "images/works/48.webp", category: "concepts", featured: false, bw: true },
+  { id: "49", title: "Reunion", titleEs: "Reencuentro", year: "", medium: "Illustration", note: "", image: "images/works/49.webp", category: "concepts", featured: false, bw: true },
   { id: "01", title: "Portrait — Warm Contrast", titleEs: "Retrato en Contraste Cálido", year: "", medium: "Illustration", note: "", image: "images/works/01.webp", category: "faces", featured: true },
   { id: "02", title: "Portrait Study I", titleEs: "Estudio de Retrato I", year: "", medium: "Illustration", note: "", image: "images/works/02.webp", category: "faces", featured: false, bw: true },
   { id: "03", title: "Portrait Study II", titleEs: "Estudio de Retrato II", year: "", medium: "Illustration", note: "", image: "images/works/03.webp", category: "faces", featured: false },
